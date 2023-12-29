@@ -226,7 +226,8 @@ apply_button.click()
 
 ## Crontab이용해서 scheduler 실행하기
 1. crontab -e
-2. * * * * * python3 /home/rkdlem196/2023_BIGDATA/data_acquisition/4_market.py 
+  * 10 * * * * python3 /home/rkdlem196/2023_BIGDATA/data_acquisition/4_market.py
+  * 10 * * * * python3 하게되면 매일 10시에 실행되게 하는거
 - /home/rkdlem196/BIGDATA/data_acquisition/market.log
 4. crontab –l 하면 scheduling한게 보임
 
