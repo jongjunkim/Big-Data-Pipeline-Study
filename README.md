@@ -52,7 +52,7 @@ Distributed System, Apache Spark, HDFS, Elasticsearch, Logstash, Kibana, Crawler
    - Learning from feedback
    - Enhanced customer satisfaction
 
-현업에서는 볼 때 Data Visualization이 가장 중요한 것입니다.
+현업에서는 볼 때 Data Visualization이 가장 중요한것
 
 
 
