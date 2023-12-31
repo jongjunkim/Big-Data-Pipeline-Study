@@ -16,7 +16,7 @@ Create and customize policies using the [Amazon S3 Policy Generator](http://awsp
 ## Lifecycle Bucket
 
 ### Overview
-Amazon S3 supports a lifecycle model for managing object storage classes.
+Amazon S3 supports a waterfall model for managing object storage classes.
 
 ### Storage Classes
 1. **S3 Standard:** Default storage class with low-latency and high-throughput.
