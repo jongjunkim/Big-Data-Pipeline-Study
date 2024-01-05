@@ -81,5 +81,88 @@ Spark DataFrames serve as a powerful abstraction for simplifying distributed big
 - When type safety is crucial, and development is in Java or Scala.
 - Extending DataFrame functionality while ensuring type safety.
 
+# Thoughts on Implementing Spark RDD
+
+When implementing Spark RDD, several considerations come to mind:
+
+- **Less Intuitive than Spark SQL or DataFrame:**
+  - RDDs are less intuitive compared to Spark SQL or DataFrame, making them less straightforward to work with.
+
+- **Low-level and Some Drawbacks:**
+  - RDDs are low-level and suffer from certain issues.
+  - They express "how" a solution is achieved rather than "what."
+
+- **Lack of Optimization:**
+  - RDDs cannot be optimized as effectively as Spark DataFrames, especially due to the absence of the Catalyst optimizer.
+
+- **Performance in Non-JVM Languages:**
+  - RDDs may perform slowly in non-JVM languages like Python.
+
+## Abstraction Level
+
+- **Managing Complexity:**
+  - Abstraction levels help manage complexity in programming.
+  - Higher abstraction levels allow simpler commands to perform more tasks.
+
+## High-level Interface vs Low-level Interface
+
+- **Low-level API:**
+  - Provides more detailed and less abstract functions, offering greater control to manipulate functions.
+
+- **High-level API:**
+  - Is more generic and simpler.
+
+## Type Safety
+
+- **Type Safety:**
+  - RDDs and Datasets provide type safety, validating types during compilation and throwing errors for incorrect assignments.
+
+## Spark SQL
+
+- **Beyond SQL:**
+  - Spark SQL is not limited to SQL; it goes beyond handling structured data.
+
+- **Performance Advantage:**
+  - Spark SQL outperforms traditional SQL as it leverages multiple nodes for processing compared to the single-core execution of SQL.
+
+- **Benefits:**
+  - Writing less code.
+  - Reading less data (fetching only necessary data).
+  - Leveraging its own optimizer to handle complex tasks.
+
+# RDD vs DataFrame Code
+
+## RDD:
+
+```python
+Data = sc.textFile(…).split(“\t”)
+Data.map(lambda x: (x[0], [int(x[1]), 1])) \
+    .reduceByKey(lambda x, y: [x[0] + y[0], x[1] + y[1]]) \
+    .map(lambda x: [x[0], x[1][0] / x[1][1]]) \
+    .collect()
+```
+## Dataframe:
+```python
+sqlCtx.table(“people”).groupby(“name”).agg(“name, avg(“age)).collect()
+```
+- **따라서 RDD보다 DataFrame을 쓰는 이유는 Python으로 코딩했을 때 성능이 떨어지지 않고 코드도 좀더 간결해지고 직관적이게 되어서**
+
+ ## Read Less Data**
+- **Spark SQL can help you read less data automatically**
+    -	Converting to more efficient formats
+    -	Using partitioning 
+    -	Partitioning 을 통해서 필요한 데이터만 가져오는거
+      - 예를들어 년도별로 parition하면 필요한 연도만 가져오는거
+    -	Pushing predicts into storage systems
+## DataFrame Queries
+  -	Catalyst Optimizer
+    - Constant Folding (Complier 최적화)
+      -	Runtime에서 처리하지 않고 Complier에서 상수값들을 미리 처리
+  -	Predicate Pushdown
+    -	(조건절을 미리 계산, 필요한 데이터만 가져오는거)
+    -	Select col from data where ~~ 했을때 select col을 먼저하는게 아니라 where 절을 통해서 데이터를 골라내고 select을 하기 때문에 더 빠르다  
+  -	Column Pruning 
+    -	연산에 필요한  column만 읽는거
 
 
+ 
