@@ -84,7 +84,27 @@ Node.js는 입출력 작업이 완료될 때까지 대기하지 않고 다른 �
 - Express 설치
   - ```ubuntu sudo npm install –g express ```
   - express . -> app.js  bin  package.json  public  routes  views 생성
-  - app.js 파일 가서 아래와 같이 써주면됨
+
+### app.js 파일 가서 아래와 같이 써주면됨
+![image](https://github.com/jongjunkim/Big-Data-Pipeline-Study/blob/main/Data%20Visualization/Node.js/image/nodejs.PNG)
+
+- 일단 npm install –s mysql 설치해주고
+```ubuntu
+$ touch routes/realestate.js
+$ touch views/realestate.jade
+$ touch conf/db.js
+```
+### conf/db.js
+![image](https://github.com/jongjunkim/Big-Data-Pipeline-Study/blob/main/Data%20Visualization/Node.js/image/dbjs.png)
+
+### app.js  
+![image](https://github.com/jongjunkim/Big-Data-Pipeline-Study/blob/main/Data%20Visualization/Node.js/image/varrealestate.PNG)
+
+### Routes/Realestate.js
+![image](https://github.com/jongjunkim/Big-Data-Pipeline-Study/blob/main/Data%20Visualization/Node.js/image/realestatejs.PNG)
+
+### http://localhost:8070/realestate/amount/2023-06-10/2023-08-10
+![image](https://github.com/jongjunkim/Big-Data-Pipeline-Study/blob/main/Data%20Visualization/Node.js/image/localhost222.PNG)
 
 
 
